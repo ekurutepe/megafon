@@ -18,16 +18,12 @@ test:
   pool: 5
   timeout: 5000
 
-<<<<<<< HEAD
-adapter: postgresql
-  database: megafon
-  pool: 5
-  timeout: 5000
-=======
+
+
 production:
   adapter: postgresql
   encoding: unicode
-  database: todo
+  database: megafon
   username: user
   password: password
->>>>>>> 569ddc6765eb023a377557c83c1e862c76445af0
+
