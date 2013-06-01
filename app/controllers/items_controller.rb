@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
     self.get_tweets_with_hash(hash)
     self.get_soundcloud_tracks_with_hash(hash)
     
-    render :json => hash.items.all
+    render :json => hash.items.limit(20)
 
   end
    
