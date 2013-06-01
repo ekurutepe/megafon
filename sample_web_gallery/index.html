@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--Required CSS Fiels-->
+	<link rel="stylesheet" href="css/rfg.css">
+	<link rel="stylesheet" href="css/lightbox.css">
+	<link rel="stylesheet" href="css/style.css">
+	 
+	<!--Required JavaScript Files-->
+	<script src="js/jquery-1.8.2.min.js"></script>
+	<script src="js/rfg.min.js"></script>
+	<script src="js/lightbox.min.js"></script>
+
+	<style>
+		#myGallery {
+			width: 100%;
+		}
+	</style>
+	<script>
+		$(document).ready(function () {
+			$('#myGallery').rfg({
+				imageWidth:350,
+				center:true,
+				spacing:5,
+				categories:false,
+				categoryOptions:{
+					defaultCategory:'All',
+					includeAll: true
+				},
+				flickrSets: [{
+							setId: '72157633836081300',
+							apiKey: 'bb8ba80ac9f7b4da1e58e45e55ae6d6a'
+						},
+						{
+							setId: '72157633834703987',
+							apiKey: 'bb8ba80ac9f7b4da1e58e45e55ae6d6a'
+						}],
+				flickrOptions: {
+					useTitle: true,
+					imageSize: 'l'
+				},
+				lightbox:true,
+				initialHeight:1200
+			});
+		});
+	</script>
+</head>
+<body>
+	<p> </p>
+	<div id='myGallery' class='rfg-gallery'></div>
+	<h6>Some footer text here</h6>
+</body>
+</html>
