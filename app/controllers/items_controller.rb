@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
     hash = Hashtag.find_or_create_by_name hashtag
             
     self.get_tweets_with_hash(hash)
-    self.get_soundcloud_tracks_with_hash(hash)
+    # self.get_soundcloud_tracks_with_hash(hash)
     
     render :json => hash.items.limit(20)
 
@@ -37,11 +37,15 @@ class ItemsController < ApplicationController
     # ]
     # http://rdoc.info/gems/twitter/Twitter/Tweet 
     filtered_tweets.each do |item|
-      source_url = "https://twitter.com/" << item.from_user.to_s << "/status/" << item.id.to_s
+      
+      media_url = item[:media].first.media_url
+      source_url = "https://twitter.com/" << item.from_user.to_s << "/status/" << item.id.to_s    
+      # i = Item.find_or_initialize_by_media( media_url )
       i = Item.find_or_initialize_by_source_url( source_url )
-    
+
       i.source_type = 'twitter'
       i.image = item[:media].first.media_url
+      i.source_url = source_url
       i.title = item.from_user
       i.subtitle = item.text
       i.hashtags << hash
@@ -63,6 +67,7 @@ class ItemsController < ApplicationController
     # TODO: convert the hashes above to actual Item objects with a relationship to the hashtag object…
     tracks.each do |item|
       source_url = item.permalink_url
+
       i = Item.find_or_initialize_by_source_url( source_url )
     
       i.source_type = 'soundcloud'
