@@ -116,6 +116,7 @@ DEPENDENCIES
   pg
   rails (= 3.2.11)
   rake (~> 10.0.1)
+  sqlite3
   sqlite3-ruby
   turbolinks (= 1.1.1)
   twitter
