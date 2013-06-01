@@ -1,0 +1,77 @@
+/*Plugin Name: Responsive Flickr Gallery
+ Author: Andrew Mead
+ Date: 11/17/2012*/
+
+/*Start theme customizatoin*/
+.rfg-current-category {
+    /*Color for the current category*/
+    background-color:#777 !important;
+    /*Fort for the current category*/
+    color:white !important;
+}
+
+.rfg-categories > li > a {
+    /*Color for the categories*/
+    background-color:#1c9bd7;
+    /*Font color for the categories*/
+    color:white;
+}
+
+.rfg-categories a {
+    /*border radius for categories*/
+    border-radius: 5px;
+}
+/*End of theme customization*/
+
+/*EDIT PAST THIS LINE AT YOUR OWN RISK!*/
+/*Category style*/
+.rfg-categories {
+    padding: 10px 0 0 0;
+    list-style-type:none;
+}
+.rfg-categories > li {
+    display:inline-block;
+    height:30px;
+    margin-right:10px;
+}
+.rfg-categories > li > a {
+    padding:3px 7px;
+    text-decoration:none;
+    font-family:arial, sans-serif;
+    font-weight:300;
+    font-size:13px;
+    letter-spacing:1px;
+}
+
+/*Image style*/
+.rfg-images {
+    position:relative;
+}
+.rfg-images > div {
+    width:800px;
+    height:565px;
+    position:absolute;
+    /*top:0px;
+    left:0px;*/
+    visibility:hidden;
+}
+.rfg-images > div > span {
+	position:absolute;
+	top:0;
+	left:0;
+	width:800px;
+	height:565px;
+	background-color:black;
+	z-index:2;
+	opacity:1;
+	background-image:url('../images/plus.png');
+	background-repeat:no-repeat;
+	background-position:center; 
+
+}
+.rfg-images > div > a > img {
+    border:none;
+    opacity:1;
+    position:absolute;
+    z-index:3;
+}
