@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
       i = Item.find_or_initialize_by_source_url( source_url )
     
       i.source_type = 'twitter'
-      i.media = item[:media].first.media_url
+      i.image = item[:media].first.media_url
       i.title = item.from_user
       i.subtitle = item.text
       i.hashtags << hash
@@ -66,14 +66,14 @@ class ItemsController < ApplicationController
       i = Item.find_or_initialize_by_source_url( source_url )
     
       i.source_type = 'soundcloud'
-      i.media = item.permalink_url
+      i.image = item.artwork_url
+      i.audio = item.permalink_url
       i.title = item.username
       i.subtitle = item.description
       i.hashtags << hash
       i.save
     end
     hash.save
-
   end
   
   
