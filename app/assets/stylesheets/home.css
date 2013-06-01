@@ -1,3 +1,17 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+*= require lightbox
+*= require rfg.css
+*/
+
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    font-family: "Oswald", sans-serif;
+    font-weight: normal;
+    text-align:center }
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
+h1 { font-size: 46px; line-height: 50px; }
+h2 { font-size: 35px; line-height: 40px; }
+h3 { font-size: 28px; line-height: 30px; }
+h4 { font-size: 21px; line-height: 30px; }
+h5 { font-size: 17px; line-height: 24px; }
+h6 { font-size: 14px; line-height: 21px; }
