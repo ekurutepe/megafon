@@ -13,7 +13,7 @@ gem 'soundcloud'
 # gem 'sqlite3'
 gem 'pg'
 gem 'twitter'
-gem "jquery-rails"
+#gem "jquery-rails"
 
 group :production do
   gem 'pg'
