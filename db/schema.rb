@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(:version => 20130601192923) do
 
   create_table "items", :force => true do |t|
     t.string   "source_type"
-    t.text     "image",       :limit => 5000
-    t.text     "source_url",  :limit => 5000
-    t.text     "title",       :limit => 5000
-    t.text     "subtitle",    :limit => 5000
+    t.text     "image"
+    t.text     "source_url"
+    t.text     "title"
+    t.text     "subtitle"
     t.datetime "timestamp"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
-    t.text     "audio",       :limit => 5000
+    t.text     "audio"
   end
 
 end
