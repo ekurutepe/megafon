@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  source_type: MyString
+  media: MyString
+  source_url: MyString
+  title: MyString
+  subtitle: MyString
+  timestamp: 2013-06-01 17:13:12
+
+two:
+  source_type: MyString
+  media: MyString
+  source_url: MyString
+  title: MyString
+  subtitle: MyString
+  timestamp: 2013-06-01 17:13:12

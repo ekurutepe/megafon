@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    tweets = Twitter.search(params[:hashtag], :count => 20, :result_type => 'popular', :filter => 'links', :include_entities => true)
-    
+    tweets = Twitter.search("#" << params[:hashtag], :count => 2000, :result_type => 'all', :filter => 'links', :include_entities => true)
     
 
     filtered_tweets = []
@@ -27,8 +26,10 @@ class ItemsController < ApplicationController
     # ]
     # http://rdoc.info/gems/twitter/Twitter/Tweet 
 
-    formatted_results = filtered_tweets.map { |item| {:source_type => 'twitter', :media => item[:media].first.media_url, :source_url => item.id}}
+    formatted_results = filtered_tweets.map { |item| {:source_type => 'twitter', :media => item[:media].first.media_url, :source_url => "https://twitter.com/" << item.from_user.to_s << "/status/" << item.id.to_s, :title => item.from_user,:subtitle => item.text}}
     render :json => formatted_results
+
+    #
   end
   
   

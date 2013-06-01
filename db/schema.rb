@@ -11,6 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130601151944) do
+
+  create_table "hashtags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "hashtags_items", :id => false, :force => true do |t|
+    t.integer "hashtag_id"
+    t.integer "item_id"
+  end
+
+  create_table "items", :force => true do |t|
+    t.string   "source_type"
+    t.string   "media"
+    t.string   "source_url"
+    t.string   "title"
+    t.string   "subtitle"
+    t.datetime "timestamp"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
 end
