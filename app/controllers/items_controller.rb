@@ -3,7 +3,8 @@ class ItemsController < ApplicationController
     #TODO: call get_tweets
     #TODO: call get_soundcloud
     #TODO: fetch item with relationship hashtag and return
-    render :json => formatted_results
+    hashtag = params[:hashtag]
+    self.get_soundcloud_tracks_with_hashtag(hashtag)
   end
   
   
@@ -36,10 +37,38 @@ class ItemsController < ApplicationController
 
     formatted_results = filtered_tweets.map { |item| {:source_type => 'twitter', :media => item[:media].first.media_url, :source_url => "https://twitter.com/" << item.from_user.to_s << "/status/" << item.id.to_s, :title => item.from_user,:subtitle => item.text}}
     # TODO: convert the hashes above to actual Item objects with a relationship to the hashtag object…
+    render :json => formatted_results
   end
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   def get_soundcloud_tracks_with_hashtag(hashtag)
     # TODO: the same as above!
+    # create a client object with your app credentials
+    client = Soundcloud.new(:client_id => '2826b6e0008b427559ece94781493083')
+
+    # find all sounds of hashtag licensed under 'creative commons share alike'
+    tracks = client.get('/tracks', :q => hashtag, :licence => 'cc-by-sa')
+
+
+    formatted_results2 = tracks.map { |item| {:source_type => 'soundcloud', :media => item.permalink, :source_url => item.permalink_url, :title => item.username,:subtitle => item.description}}
+    # TODO: convert the hashes above to actual Item objects with a relationship to the hashtag object…
+    render :json => formatted_results2
+
   end
   
   
