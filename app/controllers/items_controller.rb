@@ -71,7 +71,11 @@ class ItemsController < ApplicationController
       i = Item.find_or_initialize_by_source_url( source_url )
     
       i.source_type = 'soundcloud'
-      i.image = item.artwork_url
+      if item.artwork_url.nil?
+        i.image = 'http://blog.soundcloud.com/wp-content/uploads/2011/06/soundcloud_logo.gif'
+      else 
+        i.image = item.artwork_url 
+      end
       i.audio = item.permalink_url
       i.title = item.username
       i.subtitle = item.description
