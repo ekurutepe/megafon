@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130601151944) do
+ActiveRecord::Schema.define(:version => 20130601182101) do
 
   create_table "hashtags", :force => true do |t|
     t.string   "name"
@@ -26,13 +26,14 @@ ActiveRecord::Schema.define(:version => 20130601151944) do
 
   create_table "items", :force => true do |t|
     t.string   "source_type"
-    t.string   "media"
+    t.string   "image"
     t.string   "source_url"
     t.string   "title"
     t.string   "subtitle"
     t.datetime "timestamp"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "audio"
   end
 
 end
