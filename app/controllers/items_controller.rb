@@ -1,16 +1,21 @@
 class ItemsController < ApplicationController
   def index
-    #TODO: call get_tweets
-    #TODO: call get_soundcloud
-    #TODO: fetch item with relationship hashtag and return
     hashtag = params[:hashtag]
-    self.get_soundcloud_tracks_with_hashtag(hashtag)
-  end
-  
-  
-  def get_tweets_with_hashtag(hashtag)
-    tweets = Twitter.search("#" << params[:hashtag], :count => 2000, :result_type => 'all', :filter => 'links', :include_entities => true)
     
+    hash = Hashtag.find_or_create_by_name hashtag
+            
+    self.get_tweets_with_hash hash
+    
+    #TODO: call get_soundcloud
+
+    
+
+    render :json => hash.items.all
+
+  end
+   
+  def get_tweets_with_hash(hash)
+    tweets = Twitter.search("#" << hash.name, :count => 2000, :result_type => 'all', :filter => 'links', :include_entities => true)
 
     filtered_tweets = []
     tweets[:statuses].each do |t|
@@ -34,27 +39,21 @@ class ItemsController < ApplicationController
     #   …
     # ]
     # http://rdoc.info/gems/twitter/Twitter/Tweet 
+    filtered_tweets.each do |item|
+      source_url = "https://twitter.com/" << item.from_user.to_s << "/status/" << item.id.to_s
+      i = Item.find_or_initialize_by_source_url( source_url )
+    
+      i.source_type = 'twitter'
+      i.media = item[:media].first.media_url
+      i.title = item.from_user
+      i.subtitle = item.text
+      i.hashtags << hash
+      i.save
+    end
+    hash.save
 
-    formatted_results = filtered_tweets.map { |item| {:source_type => 'twitter', :media => item[:media].first.media_url, :source_url => "https://twitter.com/" << item.from_user.to_s << "/status/" << item.id.to_s, :title => item.from_user,:subtitle => item.text}}
-    # TODO: convert the hashes above to actual Item objects with a relationship to the hashtag object…
-    render :json => formatted_results
+
   end
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
   def get_soundcloud_tracks_with_hashtag(hashtag)
     # TODO: the same as above!
