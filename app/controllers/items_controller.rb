@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    tweets = Twitter.search(params[:hashtag], :count => 200, :result_type => 'popular', :filter => 'links', :include_entities => true)
-    
+    tweets = Twitter.search(params[:hashtag], :count => 2000, :result_type => 'all', :filter => 'links', :include_entities => true)
     
 
     filtered_tweets = []
