@@ -25,14 +25,9 @@ group :assets do
 
 end
 
-gem 'jquery-rails'
-gem 'sass-rails'
 gem 'uglifier', '>= 1.0.3'
-gem 'coffee-rails'
-gem 'jquery-rails'
 gem 'turbolinks', '1.1.1'
 gem 'jbuilder'
-
 
 
 # To use ActiveModel has_secure_password

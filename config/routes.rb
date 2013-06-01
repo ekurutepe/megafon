@@ -1,4 +1,6 @@
 Megafon::Application.routes.draw do
+  get "home/index"
+
   get "mockup/index"
 
   # The priority is based upon order of creation:
