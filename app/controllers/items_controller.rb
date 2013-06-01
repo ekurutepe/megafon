@@ -48,7 +48,10 @@ class ItemsController < ApplicationController
       i.source_url = source_url
       i.title = item.from_user
       i.subtitle = item.text
-      i.hashtags << hash
+      unless i.hashtags.include?(hash)
+         i.hashtags << hash
+      end
+
       i.save
     end
     hash.save
@@ -79,7 +82,10 @@ class ItemsController < ApplicationController
       i.audio = item.permalink_url
       i.title = item.username
       i.subtitle = item.description
-      i.hashtags << hash
+      unless i.hashtags.include?(hash)
+         i.hashtags << hash
+      end
+
       i.save
     end
     hash.save
