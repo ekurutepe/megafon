@@ -1,12 +1,12 @@
 class AlterColumn < ActiveRecord::Migration
   def up
     change_table :items do |t|
-      t.change :image, :text, :limit => 5000
-      t.change :source_url, :text, :limit => 5000
-      t.change :title, :text, :limit => 5000
-      t.change :subtitle, :text, :limit => 5000
-      t.change :image, :text, :limit => 5000
-      t.change :audio, :text, :limit => 5000
+      t.change :image, :text
+      t.change :source_url, :text
+      t.change :title, :text
+      t.change :subtitle, :text
+      t.change :image, :text
+      t.change :audio, :text
     end
   end
 
