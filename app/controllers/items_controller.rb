@@ -13,7 +13,22 @@ class ItemsController < ApplicationController
         end
       end
     end
-    render :json => filtered_tweets
+    
+    # [
+    #   {
+    #      "source_type": 'twitter'/'soundcloud'/'something else',
+    #      "media": 'canonical url for picture' or 'http://api.soundcloud.com/tracks/13158665.json',
+    #      "source_url": 'where to link, open page',
+    #      "title": '(title when available)',
+    #      "subtitle": '(description when available)',
+    #      "timestamp": when item was created in standard rails time format
+    #   },
+    #   …
+    # ]
+    # http://rdoc.info/gems/twitter/Twitter/Tweet 
+
+    formatted_results = filtered_tweets.map { |item| {:source_type => 'twitter', :media => item[:media].first.media_url, :source_url => item.id}}
+    render :json => formatted_results
   end
   
   
