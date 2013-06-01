@@ -64,7 +64,7 @@
 	background-color:black;
 	z-index:2;
 	opacity:1;
-	background-image:url('../images/plus.png');
+	background-image:url('/assets/plus.png');
 	background-repeat:no-repeat;
 	background-position:center; 
 
