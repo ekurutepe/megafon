@@ -1,9 +1,8 @@
 Megafon::Application.routes.draw do
-  get "home/index"
-
-  get "mockup/index"
 
   match 'items/:hashtag' => 'items#index'
+  match ':hashtag' => 'home#index'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
