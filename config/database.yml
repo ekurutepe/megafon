@@ -18,9 +18,17 @@ test:
   pool: 5
   timeout: 5000
 
+
+
+# Host  ec2-54-227-252-82.compute-1.amazonaws.com
+# Database  d66jo330dg6qq7
+# User  ccfvncojczlccl
+# Port  5432
+# Password  Hide YzoihKYesn276AricRBi9A9Iws
+
+
 production:
   adapter: postgresql
-  encoding: unicode
-  database: todo
-  username: user
-  password: password
+  database: megafon
+  pool: 5
+  timeout: 5000
