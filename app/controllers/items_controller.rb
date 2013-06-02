@@ -3,18 +3,17 @@ class ItemsController < ApplicationController
     hashtag = params[:hashtag]
 
    
+    StatsMix.api_key = "40ee2f0eddc89be16c42"
 
 
-
-
-
-
-
-
-
-
-
-
+    # to add metadata, use the :meta symbol followed by a hash
+    StatsMix.track("Searched Hashtag", 1, {:meta => {'name' => hashtag}})
+    
+    if StatsMix.error
+      puts "Error: #{StatsMix.error}"
+    end
+    
+    
    
     hash = Hashtag.find_or_create_by_name hashtag
             
