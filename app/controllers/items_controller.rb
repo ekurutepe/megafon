@@ -6,8 +6,9 @@ class ItemsController < ApplicationController
             
     self.get_tweets_with_hash(hash)
     self.get_soundcloud_tracks_with_hash(hash)
+    self.get_eyeem_items_with_hash(hash)
     
-    render :json => hash.items.limit(20)
+    render :json => hash.items.limit(30).sort_by { |i| i.timestamp }
 
   end
    
@@ -48,6 +49,7 @@ class ItemsController < ApplicationController
       i.source_url = source_url
       i.title = item.from_user
       i.subtitle = item.text
+      i.timestamp = item[:created_at]
       unless i.hashtags.include?(hash)
          i.hashtags << hash
       end
@@ -82,6 +84,7 @@ class ItemsController < ApplicationController
       i.audio = item.permalink_url
       i.title = item.username
       i.subtitle = item.description
+      i.timestamp = item.created_at
       unless i.hashtags.include?(hash)
          i.hashtags << hash
       end
@@ -91,6 +94,41 @@ class ItemsController < ApplicationController
     hash.save
   end
   
-  
+
+  def get_eyeem_items_with_hash(hash) 
+    albums = "https://www.eyeem.com/api/v2/albums?q=#{hash.name}&client_id=6ftAfogdmbXnQtYBA3jBD9NsJpvA3scD&limit=1"
+
+    
+    albums_response = HTTParty.get(albums)
+    albums_json_parsed = ActiveSupport::JSON.decode(albums_response.body)
+
+    #go through the responses to get albumId
+    albums_json_parsed['albums']['items'].each do |item|
+      album_id = item['id']
+      photo_url = "https://www.eyeem.com/api/v2/albums/#{album_id}/photos?client_id=#{'6ftAfogdmbXnQtYBA3jBD9NsJpvA3scD'}&limit=10&detailed=1"
+    photo_response = HTTParty.get(photo_url)
+    photo_json_parsed = ActiveSupport::JSON.decode(photo_response.body)
+    puts photo_json_parsed
+
+    photo_json_parsed['photos']['items']. each do |item|
+      source_url = item['webUrl']
+
+      i = Item.find_or_initialize_by_source_url( source_url )
+      
+      i.source_type = 'eyeem' 
+      i.image = item['photoUrl']
+      i.title = item['user']['nickname']
+      i.subtitle = item['caption']
+      i.timestamp = item['updated']
+      unless i.hashtags.include?(hash)
+        i.hashtags << hash
+      end
+    i.save
+  end
+  hash.save
+
 end
+end
+end
+
 
