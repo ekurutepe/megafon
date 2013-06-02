@@ -12,3 +12,11 @@
 //
 //= require jquery-1.8.2.min
 //= require home
+
+function searchForHashtag() {
+
+  var hashtag = $('#hashtag_field').val();
+
+  window.location =  '/' + hashtag;
+  return false;
+}
