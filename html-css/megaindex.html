@@ -1,26 +1,13 @@
-/*
-*= require colorbox
-*= require rfg.css
-*/
 
-h1, h2, h3, h4, h5, h6 {
-    color: #333;
-    font-family: "Oswald", sans-serif;
-    font-weight: normal;
-    text-align:center }
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
-h1 { font-size: 46px; line-height: 50px; }
-h2 { font-size: 35px; line-height: 40px; }
-h3 { font-size: 28px; line-height: 30px; }
-h4 { font-size: 21px; line-height: 30px; }
-h5 { font-size: 17px; line-height: 24px; }
-h6 { font-size: 14px; line-height: 21px; }
+<html>
+<head>
+	<style type="text/css">
 		body {
 				background:#010101;
 				padding:0;
 				margin:0;
 				font-weight: bold;
-/*        overflow:hidden;*/
+				overflow:hidden;
 				color: #ffffff;
 				font-family: Verdana, Geneva, sans-serif; font-size: 14px; 				
 			
@@ -73,7 +60,44 @@ h6 { font-size: 14px; line-height: 21px; }
 			top: 95%; width: 100%;
 			padding: 0px;
 			font-family: Verdana, Geneva, sans-serif; font-size: 14px; 
-			background-color:#eee;
+			background-color:#000000;
 		    }
 
 			
+
+
+			
+			
+	</style>
+
+
+<title>Megafon</title>
+</head>
+<body>
+
+
+
+<center>	
+<div  class="URLbar">
+
+	<form name="urlbar" method="post" action="http://www.izigoo.com/url-bar.php">
+
+
+	<b>Search: </b>
+
+	<input type="text"  name="url_name" id="text_id" size="50"  value="" />	
+	<input type="submit" name="goname" id="text_id" value="Go" />	
+		
+      </form>	
+ </div> 
+<div  class="MainWindow">
+<iframe src="megamain.html" frameborder="0" name="Fenster1" width="99%" height="98%"  
+         align="center">
+  <p>Sorry your browser is too old and cannot display frames.</p>
+</iframe>
+</div>
+
+<br/>
+ </center>
+</body>
+</html>
