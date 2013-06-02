@@ -3,6 +3,8 @@ Megafon::Application.routes.draw do
   match 'items/:hashtag' => 'items#index'
   match ':hashtag' => 'home#index'
   
+  match 'eyeem/:hashtag' => 'items#get_eyeem_items_with_hash'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

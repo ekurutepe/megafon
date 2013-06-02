@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
             
     self.get_tweets_with_hash(hash)
     self.get_soundcloud_tracks_with_hash(hash)
+    self.get_eyeem_items_with_hash(hash)
     
     render :json => hash.items.limit(20)
 
@@ -91,6 +92,36 @@ class ItemsController < ApplicationController
     hash.save
   end
   
+
+  def get_eyeem_items_with_hash(hash) 
+    albums = "https://www.eyeem.com/api/v2/albums?q=#{hash.name}&client_id=6ftAfogdmbXnQtYBA3jBD9NsJpvA3scD&limit=20"
+    puts albums
+    albums_response = HTTParty.get(albums)
+    albums_json_parsed = ActiveSupport::JSON.decode(albums_response.body)
+    puts albums_json_parsed
+
+    #go through the responses to get albumId
+    albums_json_parsed.each do |item|
+      album_id = item[id.to_i]
+      photo_url = "https://www.eyeem.com/api/v2/albums/#{album_id}/photos?client_id=#{'6ftAfogdmbXnQtYBA3jBD9NsJpvA3scD'}&limit=100&detailed=1"
+    photo_response = HTTParty.get(photo_url)
+    photo_json_parsed = ActiveSupport::JSON.decode(photo_response.body)
+
+    source_url = photo_json_parsed.webUrl
+    i = Item.find_or_initialize_by_source_url( source_url )
+    
+    i.source_type = 'eyeem' 
+    i.image = item.artwork_url
+    i.title = item.photo.user.nickname
+    i.subtitle = item.caption
+    unless i.hashtags.include?(hash)
+      i.hashtags << hash
+    end
+
+    i.save
+  end
+  hash.save
+
   
 end
-
+end
