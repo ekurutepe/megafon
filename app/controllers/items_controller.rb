@@ -94,34 +94,39 @@ class ItemsController < ApplicationController
   
 
   def get_eyeem_items_with_hash(hash) 
-    albums = "https://www.eyeem.com/api/v2/albums?q=#{hash.name}&client_id=6ftAfogdmbXnQtYBA3jBD9NsJpvA3scD&limit=20"
-    puts albums
+    albums = "https://www.eyeem.com/api/v2/albums?q=#{hash.name}&client_id=6ftAfogdmbXnQtYBA3jBD9NsJpvA3scD&limit=1"
+
+    
     albums_response = HTTParty.get(albums)
     albums_json_parsed = ActiveSupport::JSON.decode(albums_response.body)
-    puts albums_json_parsed
 
     #go through the responses to get albumId
-    albums_json_parsed.each do |item|
-      album_id = item[id.to_i]
-      photo_url = "https://www.eyeem.com/api/v2/albums/#{album_id}/photos?client_id=#{'6ftAfogdmbXnQtYBA3jBD9NsJpvA3scD'}&limit=100&detailed=1"
+    albums_json_parsed['albums']['items'].each do |item|
+      album_id = item['id']
+      photo_url = "https://www.eyeem.com/api/v2/albums/#{album_id}/photos?client_id=#{'6ftAfogdmbXnQtYBA3jBD9NsJpvA3scD'}&limit=10&detailed=1"
     photo_response = HTTParty.get(photo_url)
     photo_json_parsed = ActiveSupport::JSON.decode(photo_response.body)
+    puts photo_json_parsed
 
-    source_url = photo_json_parsed.webUrl
-    i = Item.find_or_initialize_by_source_url( source_url )
-    
-    i.source_type = 'eyeem' 
-    i.image = item.artwork_url
-    i.title = item.photo.user.nickname
-    i.subtitle = item.caption
-    unless i.hashtags.include?(hash)
-      i.hashtags << hash
-    end
+    photo_json_parsed['photos']['items']. each do |item|
+      source_url = item['webUrl']
 
+      i = Item.find_or_initialize_by_source_url( source_url )
+      
+      i.source_type = 'eyeem' 
+      i.image = item['photoUrl']
+      i.title = item['user']['nickname']
+      i.subtitle = item['caption']
+      i.timestamp = item['updated']
+      unless i.hashtags.include?(hash)
+        i.hashtags << hash
+      end
     i.save
   end
   hash.save
 
-  
 end
 end
+end
+
+
