@@ -71,6 +71,7 @@ GEM
     multi_json (1.7.4)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
+    newrelic_rpm (3.6.3.104)
     pg (0.15.1)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -139,6 +140,7 @@ PLATFORMS
 DEPENDENCIES
   jbuilder
   less-rails
+  newrelic_rpm
   pg
   rails (= 3.2.11)
   rake (~> 10.0.1)
