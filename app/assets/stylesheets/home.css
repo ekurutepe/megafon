@@ -77,3 +77,6 @@ h6 { font-size: 14px; line-height: 21px; }
 		    }
 
 			
+div.overlay{
+	z-index: 9999;
+}
