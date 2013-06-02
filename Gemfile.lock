@@ -159,6 +159,9 @@ GEM
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     uuidtools (2.1.4)
+    xml-simple (1.1.2)
+    youtube (0.8.6)
+      xml-simple (>= 1.0.9)
 
 PLATFORMS
   ruby
@@ -179,3 +182,4 @@ DEPENDENCIES
   twitter
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
+  youtube

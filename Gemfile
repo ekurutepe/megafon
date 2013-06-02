@@ -9,6 +9,7 @@ gem 'soundcloud'
 gem 'signet'
 gem 'google-api-client', :require => 'google/api_client'
 gem 'trollop'
+gem 'youtube'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

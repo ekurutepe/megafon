@@ -4,9 +4,9 @@ class ItemsController < ApplicationController
     
     hash = Hashtag.find_or_create_by_name hashtag
             
-    #self.get_tweets_with_hash(hash)
-    #self.get_soundcloud_tracks_with_hash(hash)
-    #self.get_eyeem_items_with_hash(hash)
+    # self.get_tweets_with_hash(hash)
+    # self.get_soundcloud_tracks_with_hash(hash)
+    # self.get_eyeem_items_with_hash(hash)
     self.get_youtube_items_with_hash(hash)
     
     render :json => hash.items.limit(30).sort_by { |i| i.timestamp }.reverse
@@ -111,7 +111,7 @@ class ItemsController < ApplicationController
     photo_json_parsed = ActiveSupport::JSON.decode(photo_response.body)
     puts photo_json_parsed
 
-    photo_json_parsed['photos']['items']. each do |item|
+    photo_json_parsed['photos']['items'].each do |item|
       source_url = item['webUrl']
 
       i = Item.find_or_initialize_by_source_url( source_url )
@@ -135,50 +135,32 @@ end
 end
 
   def get_youtube_items_with_hash(hash)
-    # Initialize the client & Google+ API
     
-    #require 'google-api-client'
-    client = Google::APIClient.new
-    plus = client.discovered_api('plus')
+    videos = "https://gdata.youtube.com/feeds/api/videos?q=#{hash.name}&key=AI39si5dSwL7zXVMcZtgEIBzwjnpyNw4fpUBiTbMtWw5irVxxdAU25WaGoUKP4k7U5Bt0gXJCIS23Z8pE1BDtHFzxkOYRTh__Q&max-results=10&alt=json&v=2"
+    puts videos
 
-    # Initialize OAuth 2.0 client    
-    client.authorization.client_id = '<569326827916-6ql7rnrq1bon48bs8isb16p89ai69dks.apps.googleusercontent.com>'
-    client.authorization.client_secret = '<DCfyeQI8UG_KWbENODezLj39>'
-    client.authorization.redirect_uri = '<https://localhost/oauth2callback>'
+    videos_response = HTTParty.get(videos)
+    videos_json_parsed = ActiveSupport::JSON.decode(videos_response.body)
+
+    puts videos_json_parsed
     
-    client.authorization.scope = 'https://www.googleapis.com/auth/plus.me'
-
-    # Request authorization
-    redirect_uri = client.authorization.authorization_uri
-
-    # Wait for authorization code then exchange for token
-    client.authorization.code = '....'
-    client.authorization.fetch_access_token!
-
-    videos = client.execute(
-      :api_method => plus.activities.list,
-      :parameters => {'collection' => 'public', 'userId' => 'me'}
-    )
-
-    puts videos.data
-
-
-    videos.each do |item|
-      source_url = item['id']
+    #go through the responses to get videos
+    videos_json_parsed['feed']['entry'].each do |item|
+      source_url = item['link']['href']
+        
       i = Item.find_or_initialize_by_source_url( source_url )
       
       i.source_type = 'YouTube' 
-      i.image = item['snippet']['thumbnail']
-      i.title = item['snippet']['channeId']
-      i.subtitle = item['snippet']['title']
-      i.timestamp = item['snippet']['publishedAt']
+      i.image = item['media$group']['media$thumbnail']['url']
+      i.title = item['author']['name']
+      i.subtitle = item['title']
+      i.timestamp = item['updated']
       unless i.hashtags.include?(hash)
         i.hashtags << hash
       end
       puts i
       i.save
-
-  end
+    end
   end
 
 
