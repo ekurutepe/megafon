@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     self.get_soundcloud_tracks_with_hash(hash)
     self.get_eyeem_items_with_hash(hash)
     
-    render :json => hash.items.limit(30).sort_by { |i| i.timestamp }
+    render :json => hash.items.limit(30).sort_by { |i| i.timestamp }.reverse
 
   end
    
