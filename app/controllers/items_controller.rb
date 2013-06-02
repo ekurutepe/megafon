@@ -1,13 +1,9 @@
-require 'statsmix'
-
 class ItemsController < ApplicationController
   def index
     hashtag = params[:hashtag]
-    
+
     StatsMix.api_key = "40ee2f0eddc89be16c42"
   
-  
-
     # to add metadata, use the :meta symbol followed by a hash
     StatsMix.track("Searched Hashtag", 1, {:meta => {'name' => hashtag}})
     
@@ -140,13 +136,11 @@ class ItemsController < ApplicationController
       end
     i.save
 
+    end
+    hash.save
+    end
   end
-  hash.save
-end
 
-  
-
-end
 
   def get_youtube_items_with_hash(hash)
     
@@ -161,6 +155,8 @@ end
     #go through the responses to get videos
     videos_json_parsed['feed']['entry'].each do |item|
       source_url = item['link']['href']
+
+
         
       i = Item.find_or_initialize_by_source_url( source_url )
       
