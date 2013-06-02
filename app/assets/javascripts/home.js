@@ -1,8 +1,11 @@
-//= require lightbox.min
+//= require jquery.colorbox
 //= require rfg
 
-
 $(document).ready(function () {
+  SC.initialize({
+    client_id: '2826b6e0008b427559ece94781493083'
+  });
+  
   $('#myGallery').rfg({
     imageWidth:350,
     center:true,

@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
    
   def get_tweets_with_hash(hash)
-    tweets = Twitter.search("#" << hash.name, :count => 200, :result_type => 'all', :filter => 'links', :include_entities => true)
+    tweets = Twitter.search("#" << hash.name, {:count => 100, :result_type => 'mixed', :include_entities => true})
 
     filtered_tweets = []
     tweets[:statuses].each do |t|

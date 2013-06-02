@@ -20,13 +20,6 @@ test:
 
 
 
-# Host  ec2-54-227-252-82.compute-1.amazonaws.com
-# Database  d66jo330dg6qq7
-# User  ccfvncojczlccl
-# Port  5432
-# Password  Hide YzoihKYesn276AricRBi9A9Iws
-
-
 production:
   adapter: postgresql
   database: megafon
