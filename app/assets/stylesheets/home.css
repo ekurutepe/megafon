@@ -15,65 +15,8 @@ h3 { font-size: 28px; line-height: 30px; }
 h4 { font-size: 21px; line-height: 30px; }
 h5 { font-size: 17px; line-height: 24px; }
 h6 { font-size: 14px; line-height: 21px; }
-		body {
-				background:#010101;
-				padding:0;
-				margin:0;
-				font-weight: bold;
-/*        overflow:hidden;*/
-				color: #ffffff;
-				font-family: Verdana, Geneva, sans-serif; font-size: 14px; 				
-			
-				
-			}
 
-		a 	{ text-decoration:none; color:white }
-		.hover { background-color:black; color:grey }
-		.normal { background-color:black; color:grey }
-			
-			
-
-			
-		/* iZigoo URL bar  - This is the CSS part  */ 	
-	
-		    .URLbar {
-			color:#fff;
-/*			position: fixed; */
-			width: 100%;
-			height: 4%;
-			padding: 7px 0px 1px 0px;
-			
-			margin: 0px;
-			font-family: Verdana, Geneva, sans-serif; font-size: 14px; 
-			background-color:#151515;
-		    }
-
-		    .Links {
-			color:#fff;
-			position:absolute; 
-			bottom:0px;
-			width: 100%;
-			height: 4%;
-			padding: 5px 0px 1px 0px;
-		
-			margin: 0px;
-			font-family: Verdana, Geneva, sans-serif; font-size: 14px; 
-			background-color:#151515;
-		    }			
-			
-
-		    a { color: white; }
-
-
-
-
-		    .MainWindow {
-			color:#fff;
-//			position: absolute;
-			top: 95%; width: 100%;
-			padding: 0px;
-			font-family: Verdana, Geneva, sans-serif; font-size: 14px; 
-			background-color:#eee;
-		    }
-
+.content {
+  margin-top: 60px;
+}
 			
