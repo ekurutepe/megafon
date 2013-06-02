@@ -13,6 +13,8 @@ gem 'soundcloud'
 # gem 'sqlite3'
 gem 'pg'
 gem 'twitter'
+gem 'twitter-bootstrap-rails'
+gem 'therubyracer'
 
 group :production do
   gem 'pg'
