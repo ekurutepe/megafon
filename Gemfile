@@ -6,6 +6,9 @@ gem 'rails', '3.2.11'
 
 #gem 'soundcloud-ruby-api-wrapper'
 gem 'soundcloud'
+gem 'signet'
+gem 'google-api-client', :require => 'google/api_client'
+gem 'trollop'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

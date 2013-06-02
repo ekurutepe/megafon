@@ -28,7 +28,12 @@ GEM
     activesupport (3.2.11)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.3.4)
     arel (3.0.2)
+    autoparse (0.3.3)
+      addressable (>= 2.3.1)
+      extlib (>= 0.9.15)
+      multi_json (>= 1.0.0)
     builder (3.0.4)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -40,8 +45,19 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    extlib (0.9.16)
     faraday (0.8.7)
       multipart-post (~> 1.1)
+    google-api-client (0.6.3)
+      addressable (>= 2.3.2)
+      autoparse (>= 0.3.3)
+      extlib (>= 0.9.15)
+      faraday (~> 0.8.4)
+      jwt (>= 0.1.5)
+      launchy (>= 2.1.1)
+      multi_json (>= 1.0.0)
+      signet (>= 0.4.4)
+      uuidtools (>= 2.1.0)
     hashie (2.0.5)
     hike (1.2.2)
     httmultiparty (0.3.10)
@@ -56,6 +72,10 @@ GEM
       multi_json (>= 1.2.0)
     journey (1.0.4)
     json (1.8.0)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
+    launchy (2.3.0)
+      addressable (~> 2.3)
     libv8 (3.11.8.17)
     mail (2.4.4)
       i18n (>= 0.4.0)
@@ -93,6 +113,11 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    signet (0.4.5)
+      addressable (>= 2.2.3)
+      faraday (~> 0.8.1)
+      jwt (>= 0.1.5)
+      multi_json (>= 1.0.0)
     simple_oauth (0.2.0)
     soundcloud (0.3.1)
       hashie
@@ -112,6 +137,7 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    trollop (2.0)
     turbolinks (1.1.1)
       coffee-rails
     twitter (4.7.0)
@@ -126,18 +152,22 @@ GEM
     uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    uuidtools (2.1.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  google-api-client
   jbuilder
   pg
   rails (= 3.2.11)
   rake (~> 10.0.1)
+  signet
   soundcloud
   sqlite3
   therubyracer
+  trollop
   turbolinks (= 1.1.1)
   twitter
   twitter-bootstrap-rails
