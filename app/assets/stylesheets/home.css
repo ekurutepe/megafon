@@ -15,9 +15,3 @@ h3 { font-size: 28px; line-height: 30px; }
 h4 { font-size: 21px; line-height: 30px; }
 h5 { font-size: 17px; line-height: 24px; }
 h6 { font-size: 14px; line-height: 21px; }
-#cboxWrapper {
-  min-width: 480px;
-}
-#cboxContent {
-  min-width: 480px;
-}
