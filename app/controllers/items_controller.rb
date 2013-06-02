@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     self.get_soundcloud_tracks_with_hash(hash)
     self.get_eyeem_items_with_hash(hash)
     
-    render :json => hash.items.limit(20)
+    render :json => hash.items.limit(30).sort_by { |i| i.timestamp }
 
   end
    
@@ -49,6 +49,7 @@ class ItemsController < ApplicationController
       i.source_url = source_url
       i.title = item.from_user
       i.subtitle = item.text
+      i.timestamp = item[:created_at]
       unless i.hashtags.include?(hash)
          i.hashtags << hash
       end
@@ -83,6 +84,7 @@ class ItemsController < ApplicationController
       i.audio = item.permalink_url
       i.title = item.username
       i.subtitle = item.description
+      i.timestamp = item.created_at
       unless i.hashtags.include?(hash)
          i.hashtags << hash
       end
