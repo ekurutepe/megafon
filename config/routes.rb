@@ -4,7 +4,7 @@ Megafon::Application.routes.draw do
   match 'items/:hashtag' => 'items#index'
   match ':hashtag' => 'home#index'
 
-  root :to => 'home#index'
+  root :to => redirect("/occupygezi")
 
   
   # The priority is based upon order of creation:
