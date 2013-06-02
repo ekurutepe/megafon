@@ -124,8 +124,10 @@ class ItemsController < ApplicationController
         i.hashtags << hash
       end
     i.save
+
   end
   hash.save
+
 
 end
 end
