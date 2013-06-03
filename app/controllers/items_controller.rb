@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   def index
     hashtag = params[:hashtag]
 
-   
+    require "statsmix"   
     StatsMix.api_key = "40ee2f0eddc89be16c42"
 
 
@@ -166,7 +166,7 @@ class ItemsController < ApplicationController
       i.image = image_hash[3]['url']
 
       #i.title = trying to parse the json for the username is doing my head in
-      #can't seem to get it out and think it's because the final key
+      #can't seem to get it and think it's because the final key
       #has a $ character in it (['author']['name']['$t'])
 
       i.subtitle = item['title']
@@ -182,4 +182,3 @@ class ItemsController < ApplicationController
 
 end
 
-#https://gdata.youtube.com/feeds/api/videos/-/category_or_tag
