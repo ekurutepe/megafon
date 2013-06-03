@@ -165,13 +165,14 @@ class ItemsController < ApplicationController
 
       image_hash = item['media$group']['media$thumbnail']
       i.image = image_hash[3]['url']
+      i.video = item['content']['src']
 
       #i.title = trying to parse the json for the username is doing my head in
       #can't seem to get it and think it's because the final key
       #has a $ character in it (['author']['name']['$t'])
 
-      i.subtitle = item['title']
-      i.timestamp = item['updated']
+      i.subtitle = item['title']['$t']
+      i.timestamp = item['updated']['$t']
       unless i.hashtags.include?(hash)
         i.hashtags << hash
       end
