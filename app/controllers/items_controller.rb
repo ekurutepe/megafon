@@ -1,27 +1,27 @@
 class ItemsController < ApplicationController
+
   def index
     hashtag = params[:hashtag]
 
+    require "statsmix"   
+    StatsMix.api_key = "40ee2f0eddc89be16c42"
+
+    # to add metadata, use the :meta symbol followed by a hash
+    StatsMix.track("Searched Hashtag", 1, {:meta => {'name' => hashtag}})
+    
+    if StatsMix.error
+      puts "Error: #{StatsMix.error}"
+    end
    
 
 
-
-
-
-
-
-
-
-
-
-
-   
     hash = Hashtag.find_or_create_by_name hashtag
             
-    self.get_tweets_with_hash(hash)
-    self.get_soundcloud_tracks_with_hash(hash)
-    self.get_eyeem_items_with_hash(hash)
     self.get_youtube_items_with_hash(hash)
+    #self.get_tweets_with_hash(hash)
+    #self.get_soundcloud_tracks_with_hash(hash)
+    #self.get_eyeem_items_with_hash(hash)
+    
     
     render :json => hash.items.limit(30).sort_by { |i| i.timestamp }.reverse
 
@@ -165,13 +165,13 @@ class ItemsController < ApplicationController
 
       image_hash = item['media$group']['media$thumbnail']
       i.image = image_hash[3]['url']
+      i.video = item['content']['src']
 
       #i.title = trying to parse the json for the username is doing my head in
       #can't seem to get it out and think it's because the final key
       #has a $ character in it (['author']['name']['$t'])
-
-      i.subtitle = item['title']
-      i.timestamp = item['updated']
+      i.subtitle = item['title']['$t']
+      i.timestamp = item['updated']['$t']
       unless i.hashtags.include?(hash)
         i.hashtags << hash
       end
@@ -183,4 +183,4 @@ class ItemsController < ApplicationController
 
 end
 
-#https://gdata.youtube.com/feeds/api/videos/-/category_or_tag
+
