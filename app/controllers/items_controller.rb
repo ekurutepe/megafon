@@ -17,10 +17,11 @@ class ItemsController < ApplicationController
    
     hash = Hashtag.find_or_create_by_name hashtag
             
+    self.get_youtube_items_with_hash(hash)
     self.get_tweets_with_hash(hash)
     self.get_soundcloud_tracks_with_hash(hash)
     self.get_eyeem_items_with_hash(hash)
-    self.get_youtube_items_with_hash(hash)
+    
     
     render :json => hash.items.limit(30).sort_by { |i| i.timestamp }.reverse
 
@@ -147,7 +148,7 @@ class ItemsController < ApplicationController
 
   def get_youtube_items_with_hash(hash)
     
-    videos = "https://gdata.youtube.com/feeds/api/videos?q=#{hash.name}&key=AI39si5dSwL7zXVMcZtgEIBzwjnpyNw4fpUBiTbMtWw5irVxxdAU25WaGoUKP4k7U5Bt0gXJCIS23Z8pE1BDtHFzxkOYRTh__Q&max-results=10&alt=json&v=2"
+    videos = "https://gdata.youtube.com/feeds/api/videos?q=#{hash.name}&key=AI39si5dSwL7zXVMcZtgEIBzwjnpyNw4fpUBiTbMtWw5irVxxdAU25WaGoUKP4k7U5Bt0gXJCIS23Z8pE1BDtHFzxkOYRTh__Q&max-results=50&alt=json&v=2"
 
     videos_response = HTTParty.get(videos)
     videos_json_parsed = ActiveSupport::JSON.decode(videos_response.body)
